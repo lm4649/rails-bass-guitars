@@ -1,11 +1,28 @@
-<h1>All about that Bass</h1>
-<p> Connect legendary gears to artists and songs of exception</p>
-<%= link_to 'Add a bass', new_bass_path  %>
-<ul>
-  <% @basses.each do |bass| %>
-  <li>
-    <%= cl_image_tag bass.photos[0].key, width:100, height: 250, crop: :fill %>
-    <%= link_to "#{bass.name}", bass_path(bass) %>
-  </li>
-  <% end %>
-</ul>
+<!-- banner -->
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path "Bass_banner_1.jpg" %>');">
+  <div class="container">
+    <h1>All about that <strong>Bass</strong></h1>
+    <p>Connect legendary gears to artists and songs of exception</p>
+     <form class="form-inline my-2 my-lg-0 d-flef justify-content-between align-items-start">
+      <%= link_to 'Add a bass', new_bass_path, class: 'btn btn-flat'  %>
+      <div class="form-group">
+        <input class="form-control mr-sm-2" name="query" value= "<%= params[:query] %>" type="search" placeholder="bass/brand/artist" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    <!-- <ul> -->
+      <% @basses.each do |bass| %>
+      <!-- <li class="mb-4"> -->
+        <div class="card-bass swiper-slide" style="background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path bass.photos[1].key, crop: :fill, gravity: :auto %>')">
+          <%= link_to "#{bass.name}", bass_path(bass), class: 'btn-block btn-lg' %>
+        </div>
+      <!-- </li> -->
+      <% end %>
+    <!-- </ul> -->
+  </div>
+  <div class="swiper-pagination"></div>
+</div>

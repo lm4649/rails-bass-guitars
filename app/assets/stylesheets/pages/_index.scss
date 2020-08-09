@@ -1,2 +1,19 @@
 // Import page-specific CSS files here.
 @import "home";
+
+ul {
+  list-style : none;
+}
+
+a {
+  color: #EFE;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+  text-decoration: none;
+  opacity: 0.7;
+  &:hover{
+    color: #AAF;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    text-decoration: none;
+    opacity : 1;
+  }
+}

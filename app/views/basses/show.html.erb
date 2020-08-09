@@ -1,46 +1,104 @@
 <!-- Banner and main info -->
-<% @bass.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
-<h1><%= "#{@bass.name} by #{@bass.manufacturer.name}"%></h1>
-<p>
-  <%= "Made in #{@bass.year}, #{@bass.string_num} strings, #{@bass.fretless ? 'fretless' : 'fretted'}, #{@bass.active ? 'active' : 'passive'}" %>
-</p>
+<div class="container">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+      <% i = 1 %>
+      <% (@bass.photos.size - 1).times do %>
+        <li data-target="#carouselExampleCaptions" data-slide-to=<%= "#{i}" %>></li>
+        <% i += 1 %>
+      <% end %>
+    </ol>
+    <div class="carousel-inner">
+      <% @bass.photos.each_with_index do |photo, index| %>
+        <% if index.zero? %>
+          <div class="carousel-item active">
+            <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, gravity: :faces, quality: :auto, fetch_format: :auto, class: 'd-block w-100' %>
+            <div class="carousel-caption d-none d-md-block">
+              <h1 style="text-shadow: 1px 1px 6px rgba(0,0,0,0.8)"><%= "#{@bass.name} by #{@bass.manufacturer.name}"%></h1>
+              <p style="text-shadow: 1px 1px 6px rgba(0,0,0,0.8)">
+                <%= "Made in #{@bass.year}, #{@bass.string_num} strings, #{@bass.fretless ? 'fretless' : 'fretted'}, #{@bass.active ? 'active' : 'passive'}" %>
+              </p>
+            </div>
+          </div>
+        <% else %>
+          <div class="carousel-item">
+            <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, gravity: :faces, quality: :auto, fetch_format: :auto, class: 'd-block w-100' %>
+            <div class="carousel-caption d-none d-md-block">
+              <h1 style="text-shadow: 1px 1px 6px rgba(0,0,0,0.8)"><%= "#{@bass.name} by #{@bass.manufacturer.name}"%></h1>
+              <p style="text-shadow: 1px 1px 6px rgba(0,0,0,0.8)">
+                <%= "Made in #{@bass.year}, #{@bass.string_num} strings, #{@bass.fretless ? 'fretless' : 'fretted'}, #{@bass.active ? 'active' : 'passive'}" %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+<!-- end banner caroussel -->
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-12 col-lg-6 mt-5">
+      <!-- List of Artists -->
+      <h2 class= "mb-5">Artists</h2>
+      <ul class = "list-group">
+        <% @bass.artists.each do |artist| %>
+        <li class = "list-group-item">
+          <strong><%= "#{artist.name}"%></strong>
+           <%= "#{'from: ' + artist.group}" %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-12 col-lg-6 mt-5">
+      <!-- List of Songs -->
+      <div style = "display:flex; justify-content: space-between; margin-bottom: 24px;">
+        <h2>Songs</h2>
+        <%= link_to "Add a new song", new_bass_song_path(@bass), class: 'btn btn-success btn-lg'  %>
+      </div>
+      <ul class= "list-group">
+        <% @bass.songs.each do |song| %>
+        <li>
+          <div class="card-product">
+            <%= cl_image_tag song.photo.key, height: 300, width: 400, crop: :fill %>
+            <div class="card-product-infos">
+              <h2 class="text-center"><%= "#{song.title}" %></h2>
+              <p><%= "#{song.genre.name}: played by #{song.artist.name}, #{song.album} - #{song.year }" %></p>
+            </div>
+            <div class="card-link">
+              <%= link_to "Play", "#{song.youtube_url}", target: 'blank' %>
+            </div>
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Reviews -->
+    <hr>
+    <div style = "display:flex; justify-content: space-between; margin-bottom: 24px;" class="mt-5">
+      <h2>Comments</h2>
+      <%= link_to "Add a comment", new_bass_comment_path(@bass), class: 'btn btn-success btn-lg' %>
+    </div>
+    <ul class= "list-group">
+      <% @bass.comments.each do |comment| %>
+      <li class = "list-group-item list-group-item-light">
+        <%= "#{'⭐️' * comment.rating}: #{comment.content}" %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
 
 
- <!-- List of Artists -->
-<h2>Artists</h2>
-<%= link_to "add a song", new_bass_song_path(@bass)  %>
-<ul>
-  <% @bass.artists.each do |artist| %>
-  <li>
-    <%= "#{artist.name}, #{artist.group}" %>
-  </li>
-  <% end %>
-</ul>
-
-<!-- List of Songs -->
-<h2>Songs</h2>
-<!-- Button trigger modal -->
-<ul>
-  <% @bass.songs.each do |song| %>
-  <li>
-    <%= cl_image_tag song.photo.key, height: 300, width: 400, crop: :fill %>
-    <%= "#{song.genre.name}: #{song.title} played by #{song.artist.name}, #{song.album} - #{song.year }" %>
-    <%= link_to "Play", "https://www.youtube.com/watch?v=Y-G4PTysacI", target: 'blank' %>
-  </li>
-  <% end %>
-</ul>
-
-<!-- Reviews -->
-<h2>Comments</h2>
-<%= link_to "Add a comment", new_bass_comment_path(@bass) %>
-<ul>
-  <% @bass.comments.each do |comment| %>
-  <li>
-    <%= "#{'*' * comment.rating}: #{comment.content}" %>
-  </li>
-  <% end %>
-</ul>
 
 

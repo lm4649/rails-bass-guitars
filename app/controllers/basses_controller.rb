@@ -1,6 +1,24 @@
 class BassesController < ApplicationController
   def index
-    @basses = Bass.order(:name)
+    if params[:query].present?
+      @query = params[:query]
+
+      brands = Manufacturer.where("name iLike '%#{params[:query]}%'")
+      artists = Artist.where("name iLike '%#{params[:query]}%'")
+      songs = Song.where("title iLike '%#{params[:query]}%'")
+
+      if brands.any? || artists.any? || songs.any?
+        @basses = []
+        @basses << brands.map { |brand| brand.basses }.flatten
+        @basses << artists.map { |artist| artist.basses }.flatten
+        @basses << songs.map { |song| song.bass }.flatten
+        @basses.flatten!
+      else
+        @basses = Bass.order(:name)
+      end
+    else
+      @basses = Bass.order(:name)
+    end
   end
 
   def show

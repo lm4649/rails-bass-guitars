@@ -1,11 +1,19 @@
-<h1>Add a Bass</h1>
-<%= simple_form_for @bass do |f| %>
-  <%= f.input :name %>
-  <%= f.input :manufacturer, collection: @manufacturers %>
-  <%= f.input :year, collection: 1940..2020 %>
-  <%= f.input :string_num, collection: 1..24 %>
-  <%= f.input :fretless, as: :boolean, checked_value: true, unchecked_value: false %>
-  <%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false %>
-  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-  <%= f.submit %>
-<% end %>
+<div class="container pt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-lg-6">
+     <h1 class= "text-center">Add a Bass</h1>
+    <%= simple_form_for @bass do |f| %>
+      <%= f.input :name %>
+      <%= f.input :manufacturer, collection: @manufacturers, input_html: { class: 'select2'} %>
+      <%= f.input :year, collection: 1940..2020, input_html: { class: 'select2'} %>
+      <%= f.input :string_num, collection: 1..24, input_html: { class: 'select2'} %>
+      <div class="form-check form-check-inline">
+        <%= f.input :fretless, as: :boolean, checked_value: true, unchecked_value: false %>
+        <%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false %>
+      </div>
+      <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+      <%= f.submit class: 'btn btn-success btn-lg btn-block' %>
+    <% end %>
+    </div>
+  </div>
+</div>

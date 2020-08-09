@@ -13,6 +13,16 @@
   <body>
     <%= yield %>
     <!-- Tap Bar -->
-    <%= link_to 'Home', basses_path  %>
+    <div class="wrapper-nav">
+      <%= link_to basses_path  do %>
+        <i class="fas fa-info-circle"></i>
+      <% end %>
+      <%= link_to basses_path  do %>
+        <i class="fas fa-caravan"></i>
+      <% end %>
+      <%= link_to new_bass_path  do %>
+        <i class="fas fa-plus-square"></i>
+      <% end %>
+    </div>
   </body>
 </html>

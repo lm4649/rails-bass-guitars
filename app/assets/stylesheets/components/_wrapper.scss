@@ -1,0 +1,19 @@
+.wrapper {
+  margin : 0 auto;
+  padding: 16px;
+  display : flex;
+  justify-content: center;
+}
+
+.wrapper-nav {
+  background-color: rgba(0,0,0,0.1);
+  margin : 0 auto;
+  padding: 8px;
+  display : flex;
+  justify-content: space-around;
+  font-size: 32px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%
+}
