@@ -31,6 +31,6 @@ class SongsController < ApplicationController
   end
 
   def song_params
-    params.require(:song).permit(:title, :year, :album, :youtube_url)
+    params.require(:song).permit(:title, :year, :album, :youtube_url, :photo)
   end
 end

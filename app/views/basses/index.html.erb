@@ -3,6 +3,9 @@
 <%= link_to 'Add a bass', new_bass_path  %>
 <ul>
   <% @basses.each do |bass| %>
-  <li><%= link_to "#{bass.name}", bass_path(bass) %></li>
+  <li>
+    <%= cl_image_tag bass.photos[0].key, width:100, height: 250, crop: :fill %>
+    <%= link_to "#{bass.name}", bass_path(bass) %>
+  </li>
   <% end %>
 </ul>

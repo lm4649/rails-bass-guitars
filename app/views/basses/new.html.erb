@@ -6,5 +6,6 @@
   <%= f.input :string_num, collection: 1..24 %>
   <%= f.input :fretless, as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.submit %>
 <% end %>

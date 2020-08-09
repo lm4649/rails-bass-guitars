@@ -25,6 +25,6 @@ class BassesController < ApplicationController
   private
 
   def bass_params
-    params.require(:bass).permit(:name, :year, :string_num, :fretless, :active)
+    params.require(:bass).permit(:name, :year, :string_num, :fretless, :active, photos: [])
   end
 end
