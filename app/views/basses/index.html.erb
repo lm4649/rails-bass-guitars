@@ -1,2 +1,8 @@
-<h1>Basses#index</h1>
-<p>Find me in app/views/basses/index.html.erb</p>
+<h1>All about that Bass</h1>
+<p> Connect legendary gears to artists and songs of exception</p>
+<%= link_to 'Add a bass', new_bass_path  %>
+<ul>
+  <% @basses.each do |bass| %>
+  <li><%= link_to "#{bass.name}", bass_path(bass) %></li>
+  <% end %>
+</ul>

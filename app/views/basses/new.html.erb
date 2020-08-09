@@ -1,2 +1,10 @@
-<h1>Basses#new</h1>
-<p>Find me in app/views/basses/new.html.erb</p>
+<h1>Add a Bass</h1>
+<%= simple_form_for @bass do |f| %>
+  <%= f.input :name %>
+  <%= f.input :manufacturer, collection: @manufacturers %>
+  <%= f.input :year, collection: 1940..2020 %>
+  <%= f.input :string_num, collection: 1..24 %>
+  <%= f.input :fretless, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false %>
+  <%= f.submit %>
+<% end %>

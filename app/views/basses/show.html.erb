@@ -1,2 +1,36 @@
-<h1>Basses#show</h1>
-<p>Find me in app/views/basses/show.html.erb</p>
+<!-- Banner and main info -->
+<h1><%= "#{@bass.name} by #{@bass.manufacturer.name}"%></h1>
+<p>
+  <%= "Made in #{@bass.year}, #{@bass.string_num} strings, #{@bass.fretless ? 'fretless' : 'fretted'}, #{@bass.active ? 'active' : 'passive'}" %>
+</p>
+
+ <!-- List of Artists -->
+<h2>Artists</h2>
+<ul>
+  <% @bass.artists.each do |artist| %>
+  <li><%= "#{artist.name}, #{artist.group}" %></li>
+  <% end %>
+</ul>
+
+<!-- List of Songs -->
+<h2>Songs</h2>
+<ul>
+  <% @bass.songs.each do |song| %>
+  <li>
+    <%= "#{song.genre.name}: #{song.title} played by #{song.artist.name}, #{song.album} - #{song.year }" %>
+    <%= link_to "Play", "https://www.youtube.com/watch?v=Y-G4PTysacI", target: 'blank' %>
+  </li>
+  <% end %>
+</ul>
+
+<!-- Reviews -->
+<h2>Reviews</h2>
+<ul>
+  <% @bass.comments.each do |comment| %>
+  <li>
+    <%= "#{'*' * comment.rating}: #{comment.content}" %>
+  </li>
+  <% end %>
+</ul>
+
+
