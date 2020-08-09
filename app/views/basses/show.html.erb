@@ -4,8 +4,10 @@
   <%= "Made in #{@bass.year}, #{@bass.string_num} strings, #{@bass.fretless ? 'fretless' : 'fretted'}, #{@bass.active ? 'active' : 'passive'}" %>
 </p>
 
+
  <!-- List of Artists -->
 <h2>Artists</h2>
+<%= link_to "add a song", new_bass_song_path(@bass)  %>
 <ul>
   <% @bass.artists.each do |artist| %>
   <li><%= "#{artist.name}, #{artist.group}" %></li>
@@ -14,6 +16,7 @@
 
 <!-- List of Songs -->
 <h2>Songs</h2>
+<!-- Button trigger modal -->
 <ul>
   <% @bass.songs.each do |song| %>
   <li>
@@ -24,7 +27,8 @@
 </ul>
 
 <!-- Reviews -->
-<h2>Reviews</h2>
+<h2>Comments</h2>
+<%= link_to "Add a comment", new_bass_comment_path(@bass) %>
 <ul>
   <% @bass.comments.each do |comment| %>
   <li>

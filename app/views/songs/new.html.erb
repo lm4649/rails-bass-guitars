@@ -1,0 +1,10 @@
+<h1>Add a new song</h1>
+<%= simple_form_for [@bass, @song] do |f| %>
+<%= f.input :title %>
+<%= f.input :album %>
+<%= f.input :year, collection: 1940..2020 %>
+<%= f.input :genre, collection: @genres %>
+<%= f.input :artist, collection: @artists %>
+<%= f.input :youtube_url %>
+<%= f.submit %>
+<% end %>

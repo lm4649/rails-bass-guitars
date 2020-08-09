@@ -1,0 +1,7 @@
+<h1>Add a Comment</h1>
+<%= simple_form_for [@bass, @comment] do |f| %>
+<%= f.input :content %>
+<%= f.input :rating, collection: 1..5 %>
+<%= f.submit %>
+<% end %>
+

@@ -8,3 +8,5 @@ class Bass < ApplicationRecord
   validates :string_num, inclusion: { in: 1..24 }, numericality: { only_integer: true }
   validates :description, length: { maximum: 50 }
 end
+
+
