@@ -3,12 +3,14 @@ class BassesController < ApplicationController
     if params[:query].present?
       @query = params[:query]
 
+      gears = Bass.where("name iLike '%#{params[:query]}%'")
       brands = Manufacturer.where("name iLike '%#{params[:query]}%'")
       artists = Artist.where("name iLike '%#{params[:query]}%'")
       songs = Song.where("title iLike '%#{params[:query]}%'")
 
-      if brands.any? || artists.any? || songs.any?
+      if gears.any? || brands.any? || artists.any? || songs.any?
         @basses = []
+        @basses << gears
         @basses << brands.map { |brand| brand.basses }.flatten
         @basses << artists.map { |artist| artist.basses }.flatten
         @basses << songs.map { |song| song.bass }.flatten
