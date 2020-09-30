@@ -14,7 +14,7 @@ class BassesController < ApplicationController
         @basses << brands.map { |brand| brand.basses }.flatten
         @basses << artists.map { |artist| artist.basses }.flatten
         @basses << songs.map { |song| song.bass }.flatten
-        @basses.flatten!
+        @basses.flatten!.uniq!
       else
         @basses = Bass.order(:name)
       end
