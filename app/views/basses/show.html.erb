@@ -13,7 +13,7 @@
       <% @bass.photos.each_with_index do |photo, index| %>
         <% if index.zero? %>
           <div class="carousel-item active">
-            <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, gravity: :faces, quality: :auto, fetch_format: :auto, class: 'd-block w-100' %>
+              <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, gravity: :faces, quality: :auto, fetch_format: :auto, class: 'd-block w-100' %>
             <div class="carousel-caption d-none d-md-block">
               <h1 style="text-shadow: 1px 1px 6px rgba(0,0,0,0.8)"><%= "#{@bass.name} by #{@bass.manufacturer.name}"%></h1>
               <p style="text-shadow: 1px 1px 6px rgba(0,0,0,0.8)">
